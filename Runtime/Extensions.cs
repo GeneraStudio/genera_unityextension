@@ -14,6 +14,11 @@ using UnityEngine.UI;
 
 public static class Extensions
 {
+    public static void Shuffle<T>(this List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1) { n--; int k = Random.Range(0, n + 1); T value = list[k]; list[k] = list[n]; list[n] = value; }
+    }
     public static float SmoothStep7(this float x) => 924 * Mathf.Pow(x, 13) - 6006 * Mathf.Pow(x, 12) + 16380 * Mathf.Pow(x, 11) - 24024 * Mathf.Pow(x, 10) + 20020 * Mathf.Pow(x, 9) - 9009 * Mathf.Pow(x, 8) + 1716 * Mathf.Pow(x, 7);
     public static ColorBlock SetColorMultiplier(this ColorBlock colorBlock, float colorMultiplier)
     {
