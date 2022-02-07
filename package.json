@@ -1,0 +1,19 @@
+{
+    "name": "com.genera.extension",
+    "version": "1.0.0",
+    "displayName": "Extension",
+    "description": "The Genera Studio Tool Box",
+    "unity": "2021.2",
+    "unityRelease": "0f0",
+    "keywords": [
+        "kevword1",
+        "keyword2",
+        "keyword3"
+    ],
+    "author": {
+        "name": "D4r3N",
+        "email": "mail@genera.studio",
+        "url": "https://genera.studio"
+    },
+    "type": "tools"
+}
