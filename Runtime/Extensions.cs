@@ -25,7 +25,6 @@ public static class Extensions
         ColorBlock cache = colorBlock;
         cache.colorMultiplier = colorMultiplier;
         return cache;
-
     }
     public static bool IsSubOrClassOf(this Type type, Type parent) => type.IsSubclassOf(parent) || type == parent;
     public static Vector3 RotateAround(Vector3 point, Vector3 pivot, Vector3 angles) => Quaternion.Euler(angles) * (point - pivot) + pivot;
