@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-#if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem;
-#endif
+// #if ENABLE_INPUT_SYSTEM
+// using UnityEngine.InputSystem;
+// #endif
 using System;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
@@ -242,11 +242,11 @@ public static class Extensions
     }*/
     public static bool TrueContains(this string strg, string value) => string.IsNullOrEmpty(value) ? false : strg.Contains(value);
 
-#if ENABLE_INPUT_SYSTEM
+// #if ENABLE_INPUT_SYSTEM
 
-    public static T Get<T>(this InputValue inputValue, out T value) where T : struct => value = inputValue.Get<T>();
+//     public static T Get<T>(this InputValue inputValue, out T value) where T : struct => value = inputValue.Get<T>();
 
-#endif
+// #endif
     // public static string  Dictionary<string, bool>
     public static bool IsValid(this UnityWebRequest www)
     {
