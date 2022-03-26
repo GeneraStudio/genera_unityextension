@@ -1,14 +1,15 @@
 {
     "name": "com.genera.extension",
     "version": "1.2.0",
-    "displayName": "Extension",
+    "displayName": "Genera Engine",
     "description": "The Genera Studio Tool Box",
     "unity": "2021.2",
     "unityRelease": "0f0",
     "keywords": [
-        "kevword1",
-        "keyword2",
-        "keyword3"
+        "tools",
+        "unity",
+        "private",
+        "Genera Studio"
     ],
     "author": {
         "name": "D4r3N",
