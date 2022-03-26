@@ -15,5 +15,8 @@
         "email": "mail@genera.studio",
         "url": "https://genera.studio"
     },
-    "type": "tools"
+    "type": "tools",
+    "dependencies": {
+        "com.unity.inputsystem": "1.3.0"
+      }
 }
