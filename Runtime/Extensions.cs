@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-// #if ENABLE_INPUT_SYSTEM
-// using UnityEngine.InputSystem;
-// #endif
+using UnityEngine.InputSystem;
 using System;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
@@ -16,7 +14,6 @@ public static class Extensions
 {
     [Tooltip("Doesn't work on none stored variable")]
     public static Vector2 Clamp(this Vector2 v2, float xMin, float xMax, float yMin, float yMax) => new Vector2(Mathf.Clamp(v2.x, xMin, xMax), Mathf.Clamp(v2.y, yMin, yMax));
-
     public static void Shuffle<T>(this List<T> list)
     {
         int n = list.Count;
@@ -31,13 +28,11 @@ public static class Extensions
     }
     public static bool IsSubOrClassOf(this Type type, Type parent) => type.IsSubclassOf(parent) || type == parent;
     public static Vector3 RotateAround(Vector3 point, Vector3 pivot, Vector3 angles) => Quaternion.Euler(angles) * (point - pivot) + pivot;
-
     public static double Abs(this double dbl) => dbl > 0 ? dbl : dbl * -1;
     public static char Last(this string str) => str.Length != 0 ? str[str.Length - 1] : char.MinValue;
     public static char First(this string str) => str.Length != 0 ? str[0] : char.MinValue;
     public static float ToVolume(this float value) => value < 0.2f ? value.Remap(0f, 0.2f, -80, -12f) : value.Remap(0.2f, 1f, -12f, 0f);
     public static float Fromvolume(this float volume) => volume < -12f ? volume.Remap(-80, -12f, 0f, 0.2f) : volume.Remap(-12f, 0f, 0.2f, 1f);
-
     public static bool IsValid(this RaycastHit hit) => hit.normal != Vector3.zero;
     public static string ToHardcoin(this int hardcoin)
     {
@@ -49,7 +44,6 @@ public static class Extensions
     }
     public static float Distance(this Transform transform, Vector3 pos) => Vector3.Distance(transform.position, pos);
     public static float Distance(this Transform transform, Transform othertransform) => Vector3.Distance(transform.position, othertransform.position);
-
     public static void ClearChild(this Transform transform, bool Immediately = false)
     {
         foreach (Transform child in transform)
@@ -59,10 +53,8 @@ public static class Extensions
         }
     }
     public static float Remap(this float f, float IMin, float IMax, float OMin, float Omax) => OMin + (f - IMin) * (Omax - OMin) / (IMax - IMin);
-
     public static bool TryGetComponent<T>(this GameObject Go) => Go.TryGetComponent(out T found);
     public static bool TryGetComponent<T>(this Component cpnt) => cpnt.TryGetComponent(out T found);
-
     public static T AddComponent<T>(this GameObject game, T duplicate) where T : Component
     {
         T target = game.AddComponent<T>();
@@ -108,7 +100,6 @@ public static class Extensions
         Vector3 dir = (to - from);
         return (dir.magnitude > 1f) ? dir.normalized : dir;
     }
-
     public static List<T> AddRange<T>(this List<T> list, IEnumerable<T> collection)
     {
         list.AddRange(collection);
@@ -154,15 +145,10 @@ public static class Extensions
         Quaternion to = transform.rotation;
         transform.rotation = Quaternion.Slerp(from, to, smooth);
     }
-
     public static string HashCode() => "#" + Random.Range(0, 9).ToString() + Random.Range(0, 9).ToString() + Random.Range(0, 9).ToString();
-
     public static T GetRandom<T>(this T[] array) => array.Length > 0 ? array[Random.Range(0, array.Length)] : default;
     public static T GetRandom<T>(this List<T> list) => list.Count > 0 ? list[Random.Range(0, list.Count)] : default;
-
-
     public static string GetCode(this string name) => name.Substring(name.LastIndexOf('_') + 1, name.Length - name.LastIndexOf('_') - 1);
-
     public static void Play(this AudioSource audioSource, AudioClip audioClip, bool loop = false, bool forceReplay = false, float start = 0f)
     {
         if (audioSource != null)
@@ -188,7 +174,6 @@ public static class Extensions
     public static Vector3 ToVector3(this float v1) => new Vector3(v1, v1, v1);
     public static Vector2 ToVector2(this float v1) => new Vector2(v1, v1);
     public static float Negative(this float number) => -Mathf.Abs(number);
-
     public static float Positive(this float number) => Mathf.Abs(number);
     public static void PlayIfNot(this AudioSource audioSource) { if (!audioSource.isPlaying) audioSource.Play(); }
     public static void StopIfNot(this AudioSource audioSource) { if (audioSource.isPlaying) audioSource.Stop(); }
@@ -205,7 +190,6 @@ public static class Extensions
         Object.DontDestroyOnLoad(obj);
         return obj;
     }
-
     public static GameObject InstantiateAndName(this Object none, GameObject prefab, string name, bool protect = false)
     {
         GameObject Obj = Object.Instantiate(prefab);
@@ -244,28 +228,18 @@ public static class Extensions
         return new Vector3(x, y, z);
     }*/
     public static bool TrueContains(this string strg, string value) => string.IsNullOrEmpty(value) ? false : strg.Contains(value);
-
-// #if ENABLE_INPUT_SYSTEM
-
-//     public static T Get<T>(this InputValue inputValue, out T value) where T : struct => value = inputValue.Get<T>();
-
-// #endif
-    // public static string  Dictionary<string, bool>
+    public static T Get<T>(this InputValue inputValue, out T value) where T : struct => value = inputValue.Get<T>();
     public static bool IsValid(this UnityWebRequest www)
     {
         bool isValid = www.result != UnityWebRequest.Result.ConnectionError && www.result != UnityWebRequest.Result.ProtocolError;
         if (!isValid) Debug.LogWarning(www.error);
         return isValid;
     }
-
 }
-
 
 [Serializable]
 public class Carrousel<T>
 {
-    //lastmovedir
-    //lockelement
     public List<T> Array = new List<T>(0);
     public int Index { get; private set; }
     public void SetIndex(T item)
@@ -273,13 +247,11 @@ public class Carrousel<T>
         Index = Array.IndexOf(item);
         Updated?.Invoke();
     }
-
     public void SetIndex(Predicate<T> match)
     {
         Index = Array.FindIndex(match);
         Updated?.Invoke();
     }
-
     public T First => Array[0];
     public T Last => Array[Array.Count - 1];
     public T Current => Array[Index];
@@ -287,15 +259,11 @@ public class Carrousel<T>
     public T Previous => GetValue(-1);
     public T GetValue(int offset = 0) => Array[((Index + offset) % Array.Count < 0) ? (((Index + offset) % Array.Count) + Array.Count) : ((Index + offset) % Array.Count)];
     public T Random => Array[UnityEngine.Random.Range(0, Array.Count - 1)];
-
     public Carrousel(List<T> list) { Array = list; Index = 0; Updated?.Invoke(); }
-
     public void SetValues(List<T> newValues) { Array = newValues; Index = 0; Updated?.Invoke(); }
-
     public void Increment() { Index = (Index + 1) % Array.Count; Updated?.Invoke(); }
     public void ClampedIncrement() { Index = (Index + 1) > Array.Count - 1 ? Index : Index + 1; Updated?.Invoke(); }
     public void Decrement() { Index = (Index - 1) % Array.Count < 0 ? ((Index - 1) % Array.Count) + Array.Count : (Index - 1) % Array.Count; Updated?.Invoke(); }
     public void ClampdDecrement() { Index = (Index - 1) < 0 ? 0 : Index - 1; Updated?.Invoke(); }
-
     public event Action Updated;
 }
