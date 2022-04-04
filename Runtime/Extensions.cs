@@ -12,7 +12,6 @@ using UnityEngine.UI;
 
 public static class Extensions
 {
-    [Tooltip("Doesn't work on none stored variable")]
     public static Vector2 Clamp(this Vector2 v2, float xMin, float xMax, float yMin, float yMax) => new Vector2(Mathf.Clamp(v2.x, xMin, xMax), Mathf.Clamp(v2.y, yMin, yMax));
     public static void Shuffle<T>(this List<T> list)
     {
